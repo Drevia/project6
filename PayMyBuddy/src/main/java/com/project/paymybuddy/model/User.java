@@ -7,15 +7,15 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Data
+@Entity
 @Getter
 @Setter
-@Entity
+@Data
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
+    @Column(name="id")
     private Integer id;
 
     @Column(name = "email")
@@ -30,10 +30,12 @@ public class User {
     @Column(name = "motDePasse")
     private String password;
 
-    @Column(name = "bankAccountKey")
+    @JoinColumn(name = "bankAccount_id")
     private String bankAccountKey;
 
+    //le passer en type int qui correspond aux ids ?
     @Column(name = "friends")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<User> friends;
 
     @Column(name = "sold")
