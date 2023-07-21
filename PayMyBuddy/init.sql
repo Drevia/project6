@@ -15,7 +15,7 @@ CREATE TABLE User (
                       friends TEXT,
                       sold INT
 );
-
+transaction
 -- Création de la table "BankAccount"
 CREATE TABLE BankAccount (
                              bankAccount_id INT PRIMARY KEY,

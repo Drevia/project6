@@ -10,6 +10,7 @@ import java.util.Date;
 @Data
 @Getter
 @Setter
+@Entity
 public class Transactions {
 
     @Id
@@ -18,10 +19,12 @@ public class Transactions {
     private Integer id;
 
     //passer les deux en type int pour id ?
-    @Column(name = "giver")
+    @JoinColumn(name = "giver")
+    @OneToOne
     private User giver;
 
     @JoinColumn(name = "receiver")
+    @OneToOne
     private User receiver;
 
     @Column(name = "description")
