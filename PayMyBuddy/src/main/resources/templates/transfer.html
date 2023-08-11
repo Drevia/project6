@@ -16,6 +16,23 @@
     <a href="#">Log Off</a>
   </div>
 </div>
+<div id="bandeau">
+  <span id="bandeau-text">Home / Transfer</span>
+</div>
+
+<div id="transfer-form">
+  <h2 id="transfer-title">Effectuer un transfert</h2>
+  <div id="transfer-inputs">
+    <select id="connections" name="connections">
+      <option value="connection1">Connection 1</option>
+      <option value="connection2">Connection 2</option>
+      <!-- Ajoutez les options ici à partir de votre base de données -->
+    </select>
+    <input type="text" id="amount" name="amount" placeholder="Montant (€)" pattern="[0-9]*" required>
+    <button id="pay-button" type="button">Pay</button>
+  </div>
+</div>
+
 <div id="transfer-content">
   <h2>Transactions</h2>
   <table>

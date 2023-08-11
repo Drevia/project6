@@ -15,12 +15,13 @@ body {
 
 #app-name {
     font-size: 24px;
+    background-color: #4CAF50; /* Nouvelle couleur de fond pour le cadre */
     padding: 10px; /* Espace interne du cadre */
     border-radius: 5px; /* Coins arrondis du cadre */
 }
 
 #tabs a {
-    color: white;
+    color: black;
     margin-right: 10px;
     text-decoration: none;
     font-size: 18px;
@@ -38,6 +39,7 @@ table {
 }
 
 #table-header th {
+    background-color: #4CAF50;
     color: white;
     padding: 10px;
 }
@@ -45,4 +47,51 @@ table {
 table td, table th {
     border: 1px solid #ccc;
     padding: 10px;
+}
+
+#bandeau {
+    background-color: #f5f5f5; /* Couleur du fond gris clair */
+    padding: 5px 20px;
+}
+
+#bandeau-text {
+    font-size: 16px;
+    color: #666; /* Couleur du texte */
+}
+
+#transfer-form {
+    background-color: #f5f5f5;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+#transfer-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#transfer-inputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#connections {
+    width: 40%;
+    padding: 5px;
+}
+
+#amount {
+    width: 30%;
+    padding: 5px;
+}
+
+#pay-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
