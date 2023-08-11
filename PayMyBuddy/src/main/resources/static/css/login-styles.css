@@ -1,0 +1,58 @@
+/* login-styles.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+#login-container {
+    text-align: center;
+    border-radius: 10px;
+    padding: 28px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 90px;
+}
+
+#app-name {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 30px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 0 auto 40px; /* Centrer le cadre et ajuster la marge en bas */
+    display: inline-block; /* Permet de réduire la largeur du cadre */
+}
+
+#login-button {
+    background-color: #2196F3;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 60px;
+}
+
+#login-button:hover {
+    background-color: #0b7dda;
+}
+
+#email, #password {
+    width: 380px;
+    height: 55px;
+    margin-bottom: 35px;
+    font-size: 24px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    transition: box-shadow 0.3s;
+}
+
+#email:focus, #password:focus {
+    outline: none;
+    box-shadow: 0px 0px 10px rgba(33, 150, 243, 0.5);
+}

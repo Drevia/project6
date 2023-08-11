@@ -18,6 +18,7 @@ public class User {
     @Column(name="id")
     private Integer id;
 
+    //clé unique pour le mail
     @Column(name = "email")
     private String email;
 
@@ -27,17 +28,9 @@ public class User {
     @Column(name = "prenom")
     private String firstName;
 
-    @Column(name = "motDePasse")
+    @Column(name = "mot_de_passe")
     private String password;
+    @Column(name = "balance")
+    private Float sold;
 
-    @JoinColumn(name = "bankAccount_id")
-    private String bankAccountKey;
-
-    //le passer en type int qui correspond aux ids ?
-    @Column(name = "friends")
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<User> friends;
-
-    @Column(name = "sold")
-    private Integer sold;
 }

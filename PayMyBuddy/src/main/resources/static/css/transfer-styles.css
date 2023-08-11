@@ -1,0 +1,48 @@
+/* transfer-styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+}
+
+#app-name {
+    font-size: 24px;
+    padding: 10px; /* Espace interne du cadre */
+    border-radius: 5px; /* Coins arrondis du cadre */
+}
+
+#tabs a {
+    color: white;
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#transfer-content {
+    text-align: center;
+    margin: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#table-header th {
+    color: white;
+    padding: 10px;
+}
+
+table td, table th {
+    border: 1px solid #ccc;
+    padding: 10px;
+}

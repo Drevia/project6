@@ -1,17 +1,15 @@
 package com.project.paymybuddy.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
 
-@Data
 @Getter
 @Setter
 @Entity
-public class Transactions {
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,13 +17,13 @@ public class Transactions {
     private Integer id;
 
     //passer les deux en type int pour id ?
-    @JoinColumn(name = "giver")
+    @JoinColumn(name = "giver_id")
     @OneToOne
-    private User giver;
+    private User giverId;
 
-    @JoinColumn(name = "receiver")
+    @JoinColumn(name = "receiver_id")
     @OneToOne
-    private User receiver;
+    private User receiverId;
 
     @Column(name = "description")
     private String description;
@@ -34,5 +32,5 @@ public class Transactions {
     private Date date;
 
     @Column(name = "amount")
-    private Integer amount;
+    private Float amount;
 }
