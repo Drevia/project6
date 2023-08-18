@@ -1,5 +1,6 @@
-package com.project.paymybuddy;
+package com.project.paymybuddy.service;
 
+import com.project.paymybuddy.exception.UserException;
 import com.project.paymybuddy.model.Transaction;
 import com.project.paymybuddy.model.TransactionsDto;
 import com.project.paymybuddy.model.User;
@@ -16,7 +17,6 @@ import java.util.Date;
 @Service
 @Transactional
 @AllArgsConstructor
-@NoArgsConstructor
 public class TransactionService {
 
     @Autowired
@@ -32,15 +32,20 @@ public class TransactionService {
         transaction.setGiverId(findUserById(transactionsToCreate.getGiverId()));
         transaction.setReceiverId(findUserById(transactionsToCreate.getReceiverId()));
         transaction.setAmount(transactionsToCreate.getAmount());
-        transaction.setDescription(transactionsToCreate.getDescription());
+        if (transactionsToCreate.getDescription() != null)
+        {
+            transaction.setDescription(transactionsToCreate.getDescription());
+        }
 
         changeSold(transactionsToCreate.getGiverId(), transactionsToCreate.getReceiverId(), transactionsToCreate.getAmount());
         return transactionRepository.save(transaction);
     }
 
     private void changeSold(Integer giver_id, Integer receiver_id, Float amount) {
-        User giver = userRepository.findById(giver_id).orElseThrow();
-        User receiver = userRepository.findById(receiver_id).orElseThrow();
+        User giver = userRepository.findById(giver_id).orElseThrow(() ->
+                new UserException("Giver with id: " + giver_id + " not Found"));
+        User receiver = userRepository.findById(receiver_id).orElseThrow(() ->
+                new UserException("Receiver with id: " + receiver_id + " not Found"));
 
         System.out.println("create Transaction by: " + giver.getFirstName() + " for: " + receiver.getFirstName());
         giver.setSold(giver.getSold() - amount);

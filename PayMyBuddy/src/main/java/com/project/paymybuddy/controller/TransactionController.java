@@ -1,6 +1,6 @@
 package com.project.paymybuddy.controller;
 
-import com.project.paymybuddy.TransactionService;
+import com.project.paymybuddy.service.TransactionService;
 import com.project.paymybuddy.model.Transaction;
 import com.project.paymybuddy.model.TransactionsDto;
 import org.springframework.beans.factory.annotation.Autowired;
