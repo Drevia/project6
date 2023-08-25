@@ -1,13 +1,14 @@
 package com.project.paymybuddy.service;
 
 import com.project.paymybuddy.exception.UserException;
+import com.project.paymybuddy.model.AppUser;
 import com.project.paymybuddy.model.Transaction;
 import com.project.paymybuddy.model.TransactionsDto;
-import com.project.paymybuddy.model.User;
 import com.project.paymybuddy.repository.TransactionRepository;
 import com.project.paymybuddy.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,8 @@ public class TransactionService {
 
     @Autowired
     UserRepository userRepository;
+
+    private final static Logger LOG = LoggerFactory.getLogger(TransactionService.class);
 
     @Transactional
     public Transaction createTransactions(TransactionsDto transactionsToCreate) {
@@ -42,19 +45,20 @@ public class TransactionService {
     }
 
     private void changeSold(Integer giver_id, Integer receiver_id, Float amount) {
-        User giver = userRepository.findById(giver_id).orElseThrow(() ->
+
+        AppUser giver = userRepository.findById(giver_id).orElseThrow(() ->
                 new UserException("Giver with id: " + giver_id + " not Found"));
-        User receiver = userRepository.findById(receiver_id).orElseThrow(() ->
+        AppUser receiver = userRepository.findById(receiver_id).orElseThrow(() ->
                 new UserException("Receiver with id: " + receiver_id + " not Found"));
 
-        System.out.println("create Transaction by: " + giver.getFirstName() + " for: " + receiver.getFirstName());
+        LOG.info("create Transaction by: " + giver.getFirstName() + " for: " + receiver.getFirstName());
         giver.setSold(giver.getSold() - amount);
         receiver.setSold(receiver.getSold() + amount);
         userRepository.save(giver);
         userRepository.save(receiver);
     }
 
-    public User findUserById(Integer id) {
-        return userRepository.findById(id).orElseThrow();
+    public AppUser findUserById(Integer id) {
+        return userRepository.findById(id).orElseThrow(/*rajouter throw d'exception*/);
     }
 }

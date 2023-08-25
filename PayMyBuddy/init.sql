@@ -5,7 +5,7 @@ CREATE DATABASE payBuddy;
 USE payBuddy;
 
 -- Création de la table "User"
-CREATE TABLE User (
+CREATE TABLE App_User (
                       id INT PRIMARY KEY AUTO_INCREMENT,
                       email TEXT(255) NOT NULL,
                       nom TEXT NOT NULL,

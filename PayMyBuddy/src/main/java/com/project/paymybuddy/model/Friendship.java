@@ -19,11 +19,11 @@ public class Friendship {
 
     @ManyToOne
     @JoinColumn(name = "user_origin_id")
-    public User userOriginId;
+    public AppUser appUserOriginId;
 
     @ManyToOne
     @JoinColumn(name = "friend_id")
-    public User friendId;
+    public AppUser friendId;
     @Id
     private Long id;
 
