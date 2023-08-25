@@ -1,17 +1,15 @@
 package com.project.paymybuddy.service;
 
 import com.project.paymybuddy.exception.UserException;
+import com.project.paymybuddy.model.AppUser;
 import com.project.paymybuddy.model.Transaction;
 import com.project.paymybuddy.model.TransactionsDto;
-import com.project.paymybuddy.model.User;
 import com.project.paymybuddy.repository.TransactionRepository;
 import com.project.paymybuddy.repository.UserRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -36,10 +34,10 @@ public class TransactionServiceTest {
 
     @Test
     void createTransactionOk() {
-        User giver =  new User();
+        AppUser giver =  new AppUser();
         giver.setId(1);
         giver.setSold(50f);
-        User receiver = new User();
+        AppUser receiver = new AppUser();
         receiver.setId(2);
         receiver.setSold(50f);
 
@@ -78,7 +76,7 @@ public class TransactionServiceTest {
 
     @Test
     void createTransactionReceiverNotFound() {
-        User giver =  new User();
+        AppUser giver =  new AppUser();
         giver.setId(1);
         giver.setSold(50f);
         TransactionsDto transactionsDto = new TransactionsDto();

@@ -1,0 +1,8 @@
+{
+  "id": 3,
+  "email": "someone@mail.test",
+  "nom": "Toto",
+  "prenom": "Test",
+  "mot_de_passe": "passwordToto",
+  "balance": 100
+}
