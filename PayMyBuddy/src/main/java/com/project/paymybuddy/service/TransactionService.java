@@ -34,7 +34,12 @@ public class TransactionService {
         transaction.setDate(new Date());
         transaction.setGiverId(findUserById(transactionsToCreate.getGiverId()));
         transaction.setReceiverId(findUserById(transactionsToCreate.getReceiverId()));
-        transaction.setAmount(transactionsToCreate.getAmount());
+        if (transactionsToCreate.getAmount() != 0) {
+            transaction.setAmount(transactionsToCreate.getAmount());
+        } else {
+            LOG.warn("Transaction amount must be superior to 1€");
+            throw new UserException("Transaction amount must be superior to 1€");
+        }
         if (transactionsToCreate.getDescription() != null)
         {
             transaction.setDescription(transactionsToCreate.getDescription());

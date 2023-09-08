@@ -1,9 +1,6 @@
 package com.project.paymybuddy.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,14 +14,20 @@ public class Friendship {
 
     //lien entre user et user
 
-    @ManyToOne
-    @JoinColumn(name = "user_origin_id")
-    public AppUser appUserOriginId;
+    @EmbeddedId
+    @AttributeOverrides({
+            @AttributeOverride(
+                    name = "appUserOriginId",
+                    column = @Column(name = "user_origin_id")
+            ),
+            @AttributeOverride(
+                    name = "userFriendId",
+                    column = @Column(name = "friend_id")
+            )
+    })
+    private FriendshipPk id;
 
-    @ManyToOne
-    @JoinColumn(name = "friend_id")
-    public AppUser friendId;
-    @Id
-    private Long id;
+
+
 
 }

@@ -1,7 +1,10 @@
 package com.project.paymybuddy.controller;
 
 import com.project.paymybuddy.model.AppUser;
+import com.project.paymybuddy.model.Friendship;
 import com.project.paymybuddy.model.TransactionReadDto;
+import com.project.paymybuddy.model.TransactionsDto;
+import com.project.paymybuddy.repository.FriendshipRepository;
 import com.project.paymybuddy.repository.TransactionRepository;
 import com.project.paymybuddy.repository.UserRepository;
 import com.project.paymybuddy.service.TransactionReadService;
@@ -12,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,9 @@ public class LoginPageController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    FriendshipRepository friendshipRepository;
 
     @Autowired
     TransactionRepository transactionRepository;
@@ -35,12 +40,14 @@ public class LoginPageController {
     }
 
     @GetMapping("/transfer")
-    public String showTransferPage(Model model) {
+    public String showTransferPage(Model model, TransactionsDto transactionsDto) {
         AppUser appUser = userRepository.findById(1).orElseThrow();
-        List<TransactionReadDto> transactionReadDtoList = new ArrayList<>();
+        List<TransactionReadDto> transactionReadDtoList;
         transactionReadDtoList = transactionReadService.getAllTransactionRead(appUser);
+        List<Friendship> friendshipList = friendshipRepository.findAllById_AppUserOriginId(1);
 
         model.addAttribute("transactionsRead", transactionReadDtoList);
+        model.addAttribute("connections", friendshipList);
         return "transfer";
     }
 

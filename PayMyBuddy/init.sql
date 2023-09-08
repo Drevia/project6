@@ -17,8 +17,8 @@ CREATE TABLE App_User (
 CREATE TABLE Friendship (
                             user_origin_id INT NOT NULL ,
                             friend_id INT NOT NULL ,
-                            FOREIGN KEY (user_origin_id) REFERENCES User(id),
-                            FOREIGN KEY (friend_id) REFERENCES User(id),
+                            FOREIGN KEY (user_origin_id) REFERENCES App_User(id),
+                            FOREIGN KEY (friend_id) REFERENCES App_User(id),
                             PRIMARY KEY(user_origin_id, friend_id)
 
 );
@@ -30,6 +30,6 @@ CREATE TABLE Transaction (
                              amount DECIMAL(5,2) NOT NULL,
                              description TEXT,
                              date DATE NOT NULL,
-                             FOREIGN KEY (giver_id) REFERENCES User (id),
-                             FOREIGN KEY (receiver_id) REFERENCES User (id)
+                             FOREIGN KEY (giver_id) REFERENCES App_User (id),
+                             FOREIGN KEY (receiver_id) REFERENCES App_User (id)
 );

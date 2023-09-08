@@ -27,13 +27,14 @@
 <div id="transfer-form">
   <h2 id="transfer-title">Effectuer un transfert</h2>
   <div id="transfer-inputs">
-    <select id="connections" name="connections">
-      <option value="connection1">Connection 1</option>
-      <option value="connection2">Connection 2</option>
-      <!-- Ajoutez les options ici à partir de votre base de données -->
-    </select>
-    <input type="text" id="amount" name="amount" placeholder="Montant (€)" pattern="[0-9]*" required>
-    <button id="pay-button" type="button">Pay</button>
+    <form th:action="@{/transaction}" method="post">
+      <select id="connections" name="connections">
+        <option th:each="connection : ${connections}" th:text="${connection.friendId.firstName}" th:value="${connection.friendId.id}"></option>
+        <!-- Ajoutez les options ici à partir de votre base de données -->
+      </select>
+      <input type="text" id="amount" name="amount" placeholder="Montant (€)" pattern="[0-9]*" required>
+      <button id="pay-button" type="submit">Pay</button>
+    </form>
   </div>
 </div>
 
