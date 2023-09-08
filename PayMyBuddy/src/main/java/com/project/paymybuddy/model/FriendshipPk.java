@@ -9,14 +9,14 @@ import java.util.Objects;
 @Embeddable
 public class FriendshipPk implements Serializable {
 
-    public Long appUserOriginId;
+    public Integer appUserOriginId;
 
-    public Long userFriendId;
+    public Integer userFriendId;
 
     public FriendshipPk() {
     }
 
-    public FriendshipPk(Long userOriginId, Long friendId) {
+    public FriendshipPk(Integer userOriginId, Integer friendId) {
         this.appUserOriginId = userOriginId;
         this.userFriendId = friendId;
     }
