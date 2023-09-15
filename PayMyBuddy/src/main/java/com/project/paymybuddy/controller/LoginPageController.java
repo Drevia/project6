@@ -10,6 +10,9 @@ import com.project.paymybuddy.repository.UserRepository;
 import com.project.paymybuddy.service.TransactionReadService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,12 +43,20 @@ public class LoginPageController {
     }
 
     @GetMapping("/transfer")
-    public String showTransferPage(Model model, TransactionsDto transactionsDto) {
+    public String showTransferPage(Model model, @RequestParam(defaultValue = "0") int page) {
+        int pageSize = 3;
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<TransactionReadDto> pagedTransactions = transactionReadService.getPagedTransactions(pageable);
+
         AppUser appUser = userRepository.findById(1).orElseThrow();
         List<TransactionReadDto> transactionReadDtoList;
         transactionReadDtoList = transactionReadService.getAllTransactionRead(appUser);
         List<Friendship> friendshipList = friendshipRepository.findAllByAppUserOriginId_Id(1);
         System.out.println(friendshipList);
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages",pagedTransactions.getTotalPages());
         model.addAttribute("transactionsRead", transactionReadDtoList);
         model.addAttribute("connections", friendshipList);
         return "transfer";

@@ -8,6 +8,8 @@ import com.project.paymybuddy.repository.FriendshipRepository;
 import com.project.paymybuddy.repository.TransactionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,5 +39,15 @@ public class TransactionReadService {
         }
 
         return transactionReadDtoList;
+    }
+
+    public Page<TransactionReadDto> getPagedTransactions(Pageable pageable) {
+        Page<Transaction> transactionPage = transactionRepository.findAll(pageable);
+        return null;
+    }
+
+    //TODO: methode pour convertir notre transaction en transactionDto
+    private TransactionReadDto pageTransactionReadDto() {
+        return null;
     }
 }
