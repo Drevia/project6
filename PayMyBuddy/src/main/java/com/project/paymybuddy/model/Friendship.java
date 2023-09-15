@@ -2,30 +2,21 @@ package com.project.paymybuddy.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-
-@Getter
-@Setter
 @Data
 @Entity
+@IdClass(FriendshipPk.class)
 public class Friendship {
 
-    //lien entre user et user
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "user_origin_id")
+    public AppUser appUserOriginId;
 
-    @EmbeddedId
-    @AttributeOverrides({
-            @AttributeOverride(
-                    name = "appUserOriginId",
-                    column = @Column(name = "user_origin_id")
-            ),
-            @AttributeOverride(
-                    name = "userFriendId",
-                    column = @Column(name = "friend_id")
-            )
-    })
-    private FriendshipPk id;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "friend_id")
+    public AppUser userFriendId;
 
 
 

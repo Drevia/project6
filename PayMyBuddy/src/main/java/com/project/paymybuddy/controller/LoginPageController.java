@@ -44,8 +44,8 @@ public class LoginPageController {
         AppUser appUser = userRepository.findById(1).orElseThrow();
         List<TransactionReadDto> transactionReadDtoList;
         transactionReadDtoList = transactionReadService.getAllTransactionRead(appUser);
-        List<Friendship> friendshipList = friendshipRepository.findAllById_AppUserOriginId(1);
-
+        List<Friendship> friendshipList = friendshipRepository.findAllByAppUserOriginId_Id(1);
+        System.out.println(friendshipList);
         model.addAttribute("transactionsRead", transactionReadDtoList);
         model.addAttribute("connections", friendshipList);
         return "transfer";

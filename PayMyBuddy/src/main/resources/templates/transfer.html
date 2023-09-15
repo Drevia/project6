@@ -28,8 +28,8 @@
   <h2 id="transfer-title">Effectuer un transfert</h2>
   <div id="transfer-inputs">
     <form th:action="@{/transaction}" method="post">
-      <select id="connections" name="connections">
-        <option th:each="connection : ${connections}" th:text="${connection.friendId.firstName}" th:value="${connection.friendId.id}"></option>
+      <select id="connections" name="receiverId">
+        <option th:each="connection : ${connections}" th:text="${connection.userFriendId.firstName}" th:value="${connection.userFriendId.id}"></option>
         <!-- Ajoutez les options ici à partir de votre base de données -->
       </select>
       <input type="text" id="amount" name="amount" placeholder="Montant (€)" pattern="[0-9]*" required>

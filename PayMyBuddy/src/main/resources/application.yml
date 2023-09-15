@@ -24,3 +24,8 @@ spring:
   web:
     resources:
       static-locations: classpath:/static/
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
