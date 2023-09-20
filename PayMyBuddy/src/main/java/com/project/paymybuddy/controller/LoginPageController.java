@@ -44,10 +44,10 @@ public class LoginPageController {
 
     @GetMapping("/transfer")
     public String showTransferPage(Model model, @RequestParam(defaultValue = "0") int page) {
-        int pageSize = 3;
+       /* int pageSize = 3;
         Pageable pageable = PageRequest.of(page, pageSize);
 
-        Page<TransactionReadDto> pagedTransactions = transactionReadService.getPagedTransactions(pageable);
+        Page<TransactionReadDto> pagedTransactions = transactionReadService.getPagedTransactions(pageable);*/
 
         AppUser appUser = userRepository.findById(1).orElseThrow();
         List<TransactionReadDto> transactionReadDtoList;
@@ -55,8 +55,8 @@ public class LoginPageController {
         List<Friendship> friendshipList = friendshipRepository.findAllByAppUserOriginId_Id(1);
         System.out.println(friendshipList);
 
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages",pagedTransactions.getTotalPages());
+        /*model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages",pagedTransactions.getTotalPages());*/
         model.addAttribute("transactionsRead", transactionReadDtoList);
         model.addAttribute("connections", friendshipList);
         return "transfer";

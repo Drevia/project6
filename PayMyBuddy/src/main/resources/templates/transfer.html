@@ -54,14 +54,14 @@
       </tr>
   </table>
 
-  <!-- Pagination -->
+<!--  &lt;!&ndash; Pagination &ndash;&gt;
   <div id="pagination">
     <a th:href="@{/transfer(page=1)}" class="pagination-link">Première</a>
     <a th:href="@{/transfer(page=${currentPage - 1})}" th:if="${currentPage > 1}" class="pagination-link">Précédente</a>
     <span id="page-number" class="pagination-info">Page [[${currentPage}]]</span>
     <a th:href="@{/transfer(page=${currentPage + 1})}" th:if="${currentPage < totalPages}" class="pagination-link">Suivante</a>
     <a th:href="@{/transfer(page=${totalPages})}" class="pagination-link">Dernière</a>
-  </div>
+  </div>-->
 
 </div>
 </body>

@@ -19,4 +19,9 @@ public class TestConfig {
                 .setType(EmbeddedDatabaseType.H2)
                 .build();
     }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/**");
+    }
 }

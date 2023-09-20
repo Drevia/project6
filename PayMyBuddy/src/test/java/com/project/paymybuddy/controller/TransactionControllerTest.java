@@ -37,7 +37,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         @Sql(value = "classpath:empty/reset.sql", executionPhase = BEFORE_TEST_METHOD),
         @Sql(value = "classpath:init/user-data.sql", executionPhase = BEFORE_TEST_METHOD)
 })
-//TODO: Desactiver Srping Security lors du test
 public class TransactionControllerTest {
 
     @Autowired
