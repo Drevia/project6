@@ -17,7 +17,6 @@ import java.util.Date;
 
 @Service
 @Transactional
-@AllArgsConstructor
 public class TransactionService {
 
     @Autowired

@@ -1,12 +1,10 @@
 package com.project.paymybuddy.service;
 
 import com.project.paymybuddy.model.AppUser;
-import com.project.paymybuddy.model.Friendship;
 import com.project.paymybuddy.model.Transaction;
 import com.project.paymybuddy.model.TransactionReadDto;
 import com.project.paymybuddy.repository.FriendshipRepository;
 import com.project.paymybuddy.repository.TransactionRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class TransactionReadService {
 
     @Autowired
@@ -43,11 +40,15 @@ public class TransactionReadService {
 
     public Page<TransactionReadDto> getPagedTransactions(Pageable pageable) {
         Page<Transaction> transactionPage = transactionRepository.findAll(pageable);
-        return null;
+        return transactionPage.map(this::pageTransactionReadDto);
     }
 
-    //TODO: methode pour convertir notre transaction en transactionDto
-    private TransactionReadDto pageTransactionReadDto() {
-        return null;
+
+    private TransactionReadDto pageTransactionReadDto(Transaction transaction) {
+        TransactionReadDto transactionReadDto = new TransactionReadDto();
+        transactionReadDto.setConnexionsName(transaction.getReceiverId().getFirstName());
+        transactionReadDto.setAmount(transaction.getAmount());
+        transactionReadDto.setDescription(transaction.getDescription());
+        return transactionReadDto;
     }
 }
