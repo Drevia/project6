@@ -41,13 +41,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TransactionControllerTest {
 
     @Autowired
-    TransactionService transactionService;
-
-    @Autowired
     private TransactionRepository transactionRepository;
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Spy
     ObjectMapper objectMapper;

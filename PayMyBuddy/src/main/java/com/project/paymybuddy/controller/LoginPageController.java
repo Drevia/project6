@@ -3,12 +3,9 @@ package com.project.paymybuddy.controller;
 import com.project.paymybuddy.model.AppUser;
 import com.project.paymybuddy.model.Friendship;
 import com.project.paymybuddy.model.TransactionReadDto;
-import com.project.paymybuddy.model.TransactionsDto;
 import com.project.paymybuddy.repository.FriendshipRepository;
-import com.project.paymybuddy.repository.TransactionRepository;
 import com.project.paymybuddy.repository.UserRepository;
 import com.project.paymybuddy.service.TransactionReadService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,9 +26,6 @@ public class LoginPageController {
 
     @Autowired
     private FriendshipRepository friendshipRepository;
-
-    @Autowired
-    private TransactionRepository transactionRepository;
 
     @Autowired
     private TransactionReadService transactionReadService;

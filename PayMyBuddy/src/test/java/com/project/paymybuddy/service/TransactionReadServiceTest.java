@@ -44,4 +44,9 @@ public class TransactionReadServiceTest {
         assertEquals(transaction.getDescription(), transactionReadDtoList.get(0).getDescription());
         assertEquals(1, transactionReadDtoList.size());
     }
+
+    @Test
+    void getPagedTransactionOk() {
+        //TODO: créer le TU
+    }
 }
