@@ -20,10 +20,10 @@ import java.util.Date;
 public class TransactionService {
 
     @Autowired
-    TransactionRepository transactionRepository;
+    private TransactionRepository transactionRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     private final static Logger LOG = LoggerFactory.getLogger(TransactionService.class);
 
@@ -33,7 +33,7 @@ public class TransactionService {
         transaction.setDate(new Date());
         transaction.setGiverId(findUserById(transactionsToCreate.getGiverId()));
         transaction.setReceiverId(findUserById(transactionsToCreate.getReceiverId()));
-        if (transactionsToCreate.getAmount() != 0) {
+        if (transactionsToCreate.getAmount() > 0f) {
             transaction.setAmount(transactionsToCreate.getAmount());
         } else {
             LOG.warn("Transaction amount must be superior to 1€");

@@ -92,4 +92,26 @@ public class TransactionServiceTest {
         });
         verify(transactionRepository, times(0)).save(any(Transaction.class));
     }
+
+    @Test
+    void createTransaction_NoAmount_ThrowError() {
+        AppUser giver =  new AppUser();
+        giver.setId(1);
+        giver.setSold(50f);
+        AppUser receiver = new AppUser();
+        receiver.setId(2);
+        receiver.setSold(50f);
+
+        TransactionsDto transactionsDto = new TransactionsDto();
+        transactionsDto.setAmount(0f);
+        transactionsDto.setGiverId(1);
+        transactionsDto.setReceiverId(2);
+
+        when(userRepository.findById(1)).thenReturn(Optional.of(giver));
+        when(userRepository.findById(2)).thenReturn(Optional.of(receiver));
+        assertThrows(UserException.class, () -> {
+            transactionService.createTransactions(transactionsDto);
+        });
+        verify(transactionRepository, times(0)).save(any(Transaction.class));
+    }
 }

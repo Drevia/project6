@@ -26,16 +26,16 @@ import java.util.List;
 public class LoginPageController {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    FriendshipRepository friendshipRepository;
+    private FriendshipRepository friendshipRepository;
 
     @Autowired
-    TransactionRepository transactionRepository;
+    private TransactionRepository transactionRepository;
 
     @Autowired
-    TransactionReadService transactionReadService;
+    private TransactionReadService transactionReadService;
 
     @GetMapping("/login")
     public String showLoginPage() {
@@ -57,6 +57,7 @@ public class LoginPageController {
 
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages",pagedTransactions.getTotalPages());
+        model.addAttribute("transactionsPage", pagedTransactions);
         model.addAttribute("transactionsRead", transactionReadDtoList);
         model.addAttribute("connections", friendshipList);
         return "transfer";

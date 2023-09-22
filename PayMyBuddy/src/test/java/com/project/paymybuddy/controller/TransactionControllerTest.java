@@ -1,13 +1,14 @@
 package com.project.paymybuddy.controller;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.project.paymybuddy.config.TestConfig;
 import com.project.paymybuddy.repository.TransactionRepository;
 import com.project.paymybuddy.repository.UserRepository;
 import com.project.paymybuddy.service.TransactionService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayNameGeneration;
-import org.junit.jupiter.api.DisplayNameGenerator;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -48,12 +49,22 @@ public class TransactionControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    @Spy
+    ObjectMapper objectMapper;
+
+
+    @BeforeEach
+    void init(){
+        objectMapper = new ObjectMapper();
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    }
+
     @Test
     void shouldCreateTransaction() throws Exception {
         File jsonFile = new ClassPathResource("init/transaction.json").getFile();
         final String transactionToCreate = Files.readString(jsonFile.toPath());
 
-        mockMvc.perform(post("/transaction")
+        mockMvc.perform(post("/transfer")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(transactionToCreate))
                 .andDo(print()).andExpect(status().isCreated());

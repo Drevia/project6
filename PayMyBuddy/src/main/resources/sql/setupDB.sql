@@ -1,0 +1,5 @@
+INSERT INTO paybuddy.app_user (id, email, nom, prenom, mot_de_passe, balance) VALUES (1, 'user1@example.com', 'Name1', 'Prenom1', '$2a$10$GfblXM1QHqY6Q8kMGb8Se./riMWWJQqsm5VJjKWyUWC9yI7ih2vVO', 200);
+INSERT INTO paybuddy.app_user (id, email, nom, prenom, mot_de_passe, balance) VALUES (2, 'user2@example.com', 'Name2', 'Prenom2', '$2a$10$AyplAJ1taO5RJccIvMjAOOU5t0glxt40ZIqfYnUNtVczwJaqttY7e', 500);
+INSERT INTO paybuddy.app_user (id, email, nom, prenom, mot_de_passe, balance) VALUES (3, 'user3@example.com', 'Name3', 'Prenom3', '$2a$10$o6cv/53hNKEmJ7KObTbyNukHwq2EcIJQKQTlRt7d9npB/rUH/XZy.', 150);
+INSERT INTO paybuddy.app_user (id, email, nom, prenom, mot_de_passe, balance) VALUES (4, 'user4@example.com', 'Name4', 'Prenom4', '$2a$10$zt/23E2uO84xPGgZSYyKVeDYEglJ36gFr/YGbynaKTsx.bIGjFmE.', 50);
+INSERT INTO paybuddy.app_user (id, email, nom, prenom, mot_de_passe, balance) VALUES (5, 'user5@example.com', 'Name5', 'Prenom5', '$2a$10$zt/23E2uO84xPGgZSYyKVeDYEglJ36gFr/YGbynaKTsx.bIGjFmE.', 300);

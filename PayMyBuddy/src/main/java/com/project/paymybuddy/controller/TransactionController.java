@@ -17,9 +17,10 @@ public class TransactionController {
 
     private final static Logger LOG = LoggerFactory.getLogger(TransactionController.class);
 
-    @PostMapping("/transaction")
+    @PostMapping("/transfer")
     public String createTransaction(TransactionsDto transactionsToCreate) {
         LOG.info("create transaction :{}" ,transactionsToCreate);
+        //TODO: recupérer l'id de la personne connecté
         transactionsToCreate.setGiverId(1);
         Transaction newTransaction = transactionService.createTransactions(transactionsToCreate);
         LOG.info("Transaction effectué avec succès: " + newTransaction);

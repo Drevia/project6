@@ -17,10 +17,7 @@ import java.util.List;
 public class TransactionReadService {
 
     @Autowired
-    TransactionRepository transactionRepository;
-
-    @Autowired
-    FriendshipRepository friendshipRepository;
+    private TransactionRepository transactionRepository;
 
     public List<TransactionReadDto> getAllTransactionRead(AppUser appUser){
         List<Transaction> transactions = transactionRepository.findAllByGiverId_Id(appUser.getId());

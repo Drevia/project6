@@ -27,7 +27,7 @@
 <div id="transfer-form">
   <h2 id="transfer-title">Effectuer un transfert</h2>
   <div id="transfer-inputs">
-    <form th:action="@{/transaction}" method="post">
+    <form th:action="@{/transfer}" method="post">
       <select id="connections" name="receiverId">
         <option th:each="connection : ${connections}" th:text="${connection.userFriendId.firstName}" th:value="${connection.userFriendId.id}"></option>
         <!-- Ajoutez les options ici à partir de votre base de données -->
@@ -47,21 +47,28 @@
       <th>Amount</th>
     </tr>
     <!-- Ajoutez ici les données de transactions dans les lignes de tableau -->
-      <tr th:each="transaction : ${transactionsRead}">
+      <tr th:each="transaction : ${transactionsPage.content}">
         <td th:text="${transaction.connexionsName}"></td>
         <td th:text="${transaction.description}"></td>
         <td th:text="${transaction.amount}"></td>
       </tr>
   </table>
 
-<!--  &lt;!&ndash; Pagination &ndash;&gt;
+
   <div id="pagination">
-    <a th:href="@{/transfer(page=1)}" class="pagination-link">Première</a>
-    <a th:href="@{/transfer(page=${currentPage - 1})}" th:if="${currentPage > 1}" class="pagination-link">Précédente</a>
-    <span id="page-number" class="pagination-info">Page [[${currentPage}]]</span>
-    <a th:href="@{/transfer(page=${currentPage + 1})}" th:if="${currentPage < totalPages}" class="pagination-link">Suivante</a>
-    <a th:href="@{/transfer(page=${totalPages})}" class="pagination-link">Dernière</a>
-  </div>-->
+    <span>Page <span th:text="${transactionsPage.number + 1}"></span></span>
+    <ul>
+      <li th:if="${transactionsPage.hasPrevious}">
+        <a th:ref="@{'/transfer?page=' + ${transactionsPage.number - 1}}">Previous</a>
+      </li>
+      <li th:each="i : ${#numbers.sequence(0, transactionsPage.totalPages - 1)}">
+        <a th:href="@{'/transfer?page=' + ${i}}"><span th:text="${i + 1}"></span></a>
+      </li>
+      <li th:if="${transactionsPage.hasNext}">
+        <a th:href="@{'/transfer?page=' + ${transactionsPage.number + 1}}">Next</a>
+      </li>
+    </ul>
+  </div>
 
 </div>
 </body>
