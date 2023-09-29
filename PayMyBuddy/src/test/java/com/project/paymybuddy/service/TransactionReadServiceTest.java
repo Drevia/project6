@@ -11,14 +11,17 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -52,10 +55,23 @@ public class TransactionReadServiceTest {
 
     @Test
     void getPagedTransactionOk() {
-        Page <Transaction> transactions = Mockito.mock(Page.class);
-        Page<TransactionReadDto> transactionReadPage = Mockito.mock(Page.class);
-        when(transactionRepository.findAll(any(Pageable.class))).thenReturn(null);
+        Transaction transaction = new Transaction();
+        AppUser giver = new AppUser();
+        AppUser receiver = new AppUser();
+        receiver.setFirstName("toto");
+        transaction.setAmount(100f);
+        transaction.setDescription("test");
+        transaction.setGiverId(giver);
+        transaction.setReceiverId(receiver);
 
-        transactionReadService.getPagedTransactions((Pageable) transactionReadPage);
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.add(transaction);
+        Page<Transaction>transactionPage = new PageImpl<>(transactions);
+
+        when(transactionRepository.findAll(any(Pageable.class))).thenReturn(transactionPage);
+
+        Page<TransactionReadDto> result = transactionReadService.getPagedTransactions(PageRequest.of(0, 3));
+
+        assertNotNull(result);
     }
 }

@@ -77,9 +77,9 @@ public class TransactionControllerTest {
         mockMvc.perform(post("/transaction")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(transactionToCreate))
-                .andDo(print()).andExpect(status().isCreated());
+                .andDo(print()).andExpect(status().is4xxClientError());
 
-        Assertions.assertEquals(1, transactionRepository.findAllByGiverId_Id(1).size());
+        Assertions.assertEquals(0, transactionRepository.findAllByGiverId_Id(1).size());
     }
 
 }

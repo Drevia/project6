@@ -1,8 +1,12 @@
 package com.project.paymybuddy.controller;
 
+import com.project.paymybuddy.model.AppUser;
+import com.project.paymybuddy.repository.UserRepository;
+import com.project.paymybuddy.service.UserService;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,8 +31,17 @@ public class TransferPageControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    UserRepository userRepository;
+
     @Test
-    public void testLoginPageOk() throws Exception {
+    public void testTransferPageOk() throws Exception {
+        AppUser appUser = userRepository.findById(1).get();
+
+        Mockito.when(userService.getUser()).thenReturn(appUser);
         mockMvc.perform(get("/transfer")).andDo(print())
                 .andExpect(view().name("transfer"));
     }
