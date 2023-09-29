@@ -8,11 +8,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -47,6 +52,10 @@ public class TransactionReadServiceTest {
 
     @Test
     void getPagedTransactionOk() {
-        //TODO: créer le TU
+        Page <Transaction> transactions = Mockito.mock(Page.class);
+        Page<TransactionReadDto> transactionReadPage = Mockito.mock(Page.class);
+        when(transactionRepository.findAll(any(Pageable.class))).thenReturn(null);
+
+        transactionReadService.getPagedTransactions((Pageable) transactionReadPage);
     }
 }

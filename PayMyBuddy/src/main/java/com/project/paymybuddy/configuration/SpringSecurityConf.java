@@ -40,7 +40,6 @@ public class SpringSecurityConf {
 
     @Autowired
     void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println(dataSource);
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select email,mot_de_passe, 1 "
                 + "from app_user where email = ?")

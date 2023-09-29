@@ -3,8 +3,9 @@ package com.project.paymybuddy.service;
 import com.project.paymybuddy.model.AppUser;
 import com.project.paymybuddy.model.Transaction;
 import com.project.paymybuddy.model.TransactionReadDto;
-import com.project.paymybuddy.repository.FriendshipRepository;
 import com.project.paymybuddy.repository.TransactionRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,10 @@ public class TransactionReadService {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    private final static Logger LOG = LoggerFactory.getLogger(TransactionReadService.class);
+
     public List<TransactionReadDto> getAllTransactionRead(AppUser appUser){
+        LOG.info("Searching transaction for user: " + appUser.getId());
         List<Transaction> transactions = transactionRepository.findAllByGiverId_Id(appUser.getId());
 
         List<TransactionReadDto> transactionReadDtoList = new ArrayList<>();

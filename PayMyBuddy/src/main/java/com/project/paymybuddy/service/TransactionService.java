@@ -50,12 +50,14 @@ public class TransactionService {
 
     private void changeSold(Integer giver_id, Integer receiver_id, Float amount) {
 
-        AppUser giver = userRepository.findById(giver_id).orElseThrow(() ->
-                new UserException("Giver with id: " + giver_id + " not Found"));
-        AppUser receiver = userRepository.findById(receiver_id).orElseThrow(() ->
-                new UserException("Receiver with id: " + receiver_id + " not Found"));
+        AppUser giver = userRepository.findById(giver_id).get();
+        AppUser receiver = userRepository.findById(receiver_id).get();
 
         LOG.info("create Transaction by: " + giver.getFirstName() + " for: " + receiver.getFirstName());
+        if (giver.getSold() <= 0 || giver.getSold() - amount < 0) {
+            LOG.info("");
+            throw new UserException("Cannot create transaction, the user: " + giver.getId() + " have not enough sold");
+        }
         giver.setSold(giver.getSold() - amount);
         receiver.setSold(receiver.getSold() + amount);
         userRepository.save(giver);
@@ -63,6 +65,7 @@ public class TransactionService {
     }
 
     public AppUser findUserById(Integer id) {
-        return userRepository.findById(id).orElseThrow(/*rajouter throw d'exception*/);
+        return userRepository.findById(id).orElseThrow(() ->
+                new UserException("User with id: " + id + " not found"));
     }
 }
