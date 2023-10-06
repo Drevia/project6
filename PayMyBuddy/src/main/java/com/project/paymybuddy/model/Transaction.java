@@ -1,5 +1,6 @@
 package com.project.paymybuddy.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -28,6 +29,7 @@ public class Transaction {
     private AppUser receiverId;
 
     @Column(name = "description")
+    @Nullable
     private String description;
 
     @Column(name = "date")

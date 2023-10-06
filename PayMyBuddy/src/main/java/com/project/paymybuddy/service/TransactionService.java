@@ -6,7 +6,6 @@ import com.project.paymybuddy.model.Transaction;
 import com.project.paymybuddy.model.TransactionsDto;
 import com.project.paymybuddy.repository.TransactionRepository;
 import com.project.paymybuddy.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +53,7 @@ public class TransactionService {
         AppUser receiver = userRepository.findById(receiver_id).get();
 
         LOG.info("create Transaction by: " + giver.getFirstName() + " for: " + receiver.getFirstName());
-        if (giver.getSold() <= 0 || giver.getSold() - amount < 0) {
+        if (giver.getSold() - amount < 0) {
             LOG.info("");
             throw new UserException("Cannot create transaction, the user: " + giver.getId() + " have not enough sold");
         }

@@ -58,14 +58,16 @@
   <div id="pagination">
     <span>Page <span th:text="${transactionsPage.number + 1}"></span></span>
     <ul>
-      <li th:if="${transactionsPage.hasPrevious}">
-        <a th:ref="@{'/transfer?page=' + ${transactionsPage.number - 1}}">Previous</a>
+      <li th:if="${transactionsPage.hasPrevious} ? 'disabled' : ''">
+        <a th:if="${transactionsPage.hasPrevious}" th:href="@{'/transfer?page=' + ${transactionsPage.number - 1}}">Previous</a>
+        <span th:unless="${transactionsPage.hasPrevious}">Previous</span>
       </li>
       <li th:each="i : ${#numbers.sequence(0, transactionsPage.totalPages - 1)}">
         <a th:href="@{'/transfer?page=' + ${i}}"><span th:text="${i + 1}"></span></a>
       </li>
-      <li th:if="${transactionsPage.hasNext}">
-        <a th:href="@{'/transfer?page=' + ${transactionsPage.number + 1}}">Next</a>
+      <li th:if="${transactionsPage.hasNext} ? 'disabled' : ''">
+        <a th:if="${transactionsPage.hasNext}" th:href="@{'/transfer?page=' + ${transactionsPage.number + 1}}">Next</a>
+        <span th:unless="${transactionsPage.hasNext}">Next</span>
       </li>
     </ul>
   </div>

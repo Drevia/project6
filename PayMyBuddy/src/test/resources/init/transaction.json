@@ -1,6 +1,6 @@
 {
     "giverId":1,
     "receiverId":2,
-    "amount":50,
-    "description":"transaction test"
+    "description":"transaction test",
+    "amount":50
 }

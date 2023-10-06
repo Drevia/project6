@@ -38,7 +38,7 @@ public class TransferPageController {
         AppUser appUser = userService.getUser();
         List<TransactionReadDto> transactionReadDtoList;
         transactionReadDtoList = transactionReadService.getAllTransactionRead(appUser);
-        List<Friendship> friendshipList = friendshipRepository.findAllByAppUserOriginId_Id(1);
+        List<Friendship> friendshipList = friendshipRepository.findAllByAppUserOriginId_Id(appUser.getId());
         System.out.println(friendshipList);
 
 

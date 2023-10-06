@@ -1,22 +1,26 @@
 package com.project.paymybuddy.controller;
 
-import com.project.paymybuddy.model.AppUser;
+import com.project.paymybuddy.model.TransactionReadDto;
+import com.project.paymybuddy.repository.TransactionRepository;
 import com.project.paymybuddy.repository.UserRepository;
-import com.project.paymybuddy.service.UserService;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @SpringBootTest
@@ -32,17 +36,25 @@ public class TransferPageControllerTest {
     MockMvc mockMvc;
 
     @Autowired
-    UserService userService;
-
-    @Autowired
     UserRepository userRepository;
 
-    @Test
-    public void testTransferPageOk() throws Exception {
-        AppUser appUser = userRepository.findById(1).get();
+    @Autowired
+    TransactionRepository transactionRepository;
 
-        Mockito.when(userService.getUser()).thenReturn(appUser);
+    @Test
+    @WithMockUser("emailTest")
+    public void testTransferPageOk() throws Exception {
+        TransactionReadDto transactionReadDto = new TransactionReadDto();
+        transactionReadDto.setConnexionsName("firstNameTest2");
+        transactionReadDto.setDescription("description");
+        transactionReadDto.setAmount(50.0f);
+
+        List<TransactionReadDto> transactionsReadDto = new ArrayList<>();
+        transactionsReadDto.add(transactionReadDto);
+
         mockMvc.perform(get("/transfer")).andDo(print())
-                .andExpect(view().name("transfer"));
+                .andExpect(view().name("transfer"))
+                .andExpect(model().attribute("totalPages", 1))
+                .andExpect(model().attribute("transactionsRead", transactionsReadDto));
     }
 }
