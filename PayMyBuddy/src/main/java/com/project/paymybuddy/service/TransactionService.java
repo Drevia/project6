@@ -30,8 +30,8 @@ public class TransactionService {
     public Transaction createTransactions(TransactionsDto transactionsToCreate) {
         Transaction transaction = new Transaction();
         transaction.setDate(new Date());
-        transaction.setGiverId(findUserById(transactionsToCreate.getGiverId()));
-        transaction.setReceiverId(findUserById(transactionsToCreate.getReceiverId()));
+        transaction.setGiverId(findUserById(transactionsToCreate.getGiverId()).getId());
+        transaction.setReceiverId(findUserById(transactionsToCreate.getReceiverId()).getId());
         if (transactionsToCreate.getAmount() > 0f) {
             transaction.setAmount(transactionsToCreate.getAmount());
         } else {

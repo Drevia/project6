@@ -21,12 +21,10 @@ public class Transaction {
 
     //passer les deux en type int pour id ?
     @JoinColumn(name = "giver_id")
-    @OneToOne
-    private AppUser giverId;
+    private Integer giverId;
 
     @JoinColumn(name = "receiver_id")
-    @OneToOne
-    private AppUser receiverId;
+    private Integer receiverId;
 
     @Column(name = "description")
     @Nullable

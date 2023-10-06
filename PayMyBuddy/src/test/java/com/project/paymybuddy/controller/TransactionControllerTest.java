@@ -62,7 +62,7 @@ public class TransactionControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated());
 
-        Assertions.assertEquals(1, transactionRepository.findAllByGiverId_Id(1).size());
+        Assertions.assertEquals(1, transactionRepository.findAllByGiverId(1).size());
     }
 
     @Test

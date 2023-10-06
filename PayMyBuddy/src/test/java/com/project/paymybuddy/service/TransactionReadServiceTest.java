@@ -8,17 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -38,13 +35,15 @@ public class TransactionReadServiceTest {
     void getAllTransactionOk() {
         Transaction transaction = new Transaction();
         AppUser giver = new AppUser();
+        giver.setId(1);
         AppUser receiver = new AppUser();
         receiver.setFirstName("toto");
+        receiver.setId(2);
         transaction.setAmount(100f);
         transaction.setDescription("test");
-        transaction.setReceiverId(receiver);
+        transaction.setReceiverId(receiver.getId());
 
-        when(transactionRepository.findAllByGiverId_Id(any())).thenReturn(List.of(transaction));
+        when(transactionRepository.findAllByGiverId(any())).thenReturn(List.of(transaction));
 
         List<TransactionReadDto> transactionReadDtoList = transactionReadService.getAllTransactionRead(giver);
         assertEquals(receiver.getFirstName(), transactionReadDtoList.get(0).getConnexionsName());
@@ -57,12 +56,14 @@ public class TransactionReadServiceTest {
     void getPagedTransactionOk() {
         Transaction transaction = new Transaction();
         AppUser giver = new AppUser();
+        giver.setId(1);
         AppUser receiver = new AppUser();
+        receiver.setId(2);
         receiver.setFirstName("toto");
         transaction.setAmount(100f);
         transaction.setDescription("test");
-        transaction.setGiverId(giver);
-        transaction.setReceiverId(receiver);
+        transaction.setGiverId(giver.getId());
+        transaction.setReceiverId(receiver.getId());
 
         List<Transaction> transactions = new ArrayList<>();
         transactions.add(transaction);

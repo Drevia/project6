@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
 
-    List<Transaction> findAllByGiverId_Id(Integer id);
+    List<Transaction> findAllByGiverId(Integer id);
 
-    Transaction findByGiverId_Id(Integer id);
+    Transaction findByGiverId(Integer id);
 }
