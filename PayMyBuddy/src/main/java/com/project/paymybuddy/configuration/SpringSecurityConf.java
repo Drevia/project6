@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 public class SpringSecurityConf {
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     private final static Logger LOG = LoggerFactory.getLogger(UserService.class);
 

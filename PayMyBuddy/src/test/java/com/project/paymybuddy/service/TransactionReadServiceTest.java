@@ -4,6 +4,7 @@ import com.project.paymybuddy.model.AppUser;
 import com.project.paymybuddy.model.Transaction;
 import com.project.paymybuddy.model.TransactionReadDto;
 import com.project.paymybuddy.repository.TransactionRepository;
+import com.project.paymybuddy.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -27,6 +29,9 @@ public class TransactionReadServiceTest {
 
     @Mock
     TransactionRepository transactionRepository;
+
+    @Mock
+    UserRepository userRepository;
 
     @InjectMocks
     TransactionReadService transactionReadService;
@@ -44,6 +49,7 @@ public class TransactionReadServiceTest {
         transaction.setReceiverId(receiver.getId());
 
         when(transactionRepository.findAllByGiverId(any())).thenReturn(List.of(transaction));
+        when(userRepository.findById(any())).thenReturn(Optional.of(receiver));
 
         List<TransactionReadDto> transactionReadDtoList = transactionReadService.getAllTransactionRead(giver);
         assertEquals(receiver.getFirstName(), transactionReadDtoList.get(0).getConnexionsName());
@@ -70,6 +76,7 @@ public class TransactionReadServiceTest {
         Page<Transaction>transactionPage = new PageImpl<>(transactions);
 
         when(transactionRepository.findAll(any(Pageable.class))).thenReturn(transactionPage);
+        when(userRepository.findById(any())).thenReturn(Optional.of(receiver));
 
         Page<TransactionReadDto> result = transactionReadService.getPagedTransactions(PageRequest.of(0, 3));
 

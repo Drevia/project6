@@ -39,7 +39,6 @@ public class TransferPageController {
         List<TransactionReadDto> transactionReadDtoList;
         transactionReadDtoList = transactionReadService.getAllTransactionRead(appUser);
         List<Friendship> friendshipList = friendshipRepository.findAllByAppUserOriginId_Id(appUser.getId());
-        System.out.println(friendshipList);
 
 
         model.addAttribute("currentPage", page);

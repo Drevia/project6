@@ -2,12 +2,8 @@ package com.project.paymybuddy.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @Data
 @Table(name = "app_user")
 public class AppUser {

@@ -1,8 +1,6 @@
 package com.project.paymybuddy.controller;
 
 import com.project.paymybuddy.model.TransactionReadDto;
-import com.project.paymybuddy.repository.TransactionRepository;
-import com.project.paymybuddy.repository.UserRepository;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -35,17 +33,11 @@ public class TransferPageControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    TransactionRepository transactionRepository;
-
     @Test
-    @WithMockUser("emailTest")
+    @WithMockUser("emailTest2")
     public void testTransferPageOk() throws Exception {
         TransactionReadDto transactionReadDto = new TransactionReadDto();
-        transactionReadDto.setConnexionsName("firstNameTest2");
+        transactionReadDto.setConnexionsName("firstNameTest");
         transactionReadDto.setDescription("description");
         transactionReadDto.setAmount(50.0f);
 

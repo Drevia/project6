@@ -30,8 +30,10 @@ public class TransactionService {
     public Transaction createTransactions(TransactionsDto transactionsToCreate) {
         Transaction transaction = new Transaction();
         transaction.setDate(new Date());
-        transaction.setGiverId(findUserById(transactionsToCreate.getGiverId()).getId());
-        transaction.setReceiverId(findUserById(transactionsToCreate.getReceiverId()).getId());
+        AppUser giver = findUserById(transactionsToCreate.getGiverId());
+        AppUser receiver = findUserById(transactionsToCreate.getReceiverId());
+        transaction.setGiverId(giver.getId());
+        transaction.setReceiverId(receiver.getId());
         if (transactionsToCreate.getAmount() > 0f) {
             transaction.setAmount(transactionsToCreate.getAmount());
         } else {
@@ -43,18 +45,14 @@ public class TransactionService {
             transaction.setDescription(transactionsToCreate.getDescription());
         }
 
-        changeSold(transactionsToCreate.getGiverId(), transactionsToCreate.getReceiverId(), transactionsToCreate.getAmount());
+        changeSold(giver, receiver, transactionsToCreate.getAmount());
         return transactionRepository.save(transaction);
     }
 
-    private void changeSold(Integer giver_id, Integer receiver_id, Float amount) {
-
-        AppUser giver = userRepository.findById(giver_id).get();
-        AppUser receiver = userRepository.findById(receiver_id).get();
+    private void changeSold(AppUser giver, AppUser receiver, Float amount) {
 
         LOG.info("create Transaction by: " + giver.getFirstName() + " for: " + receiver.getFirstName());
         if (giver.getSold() - amount < 0) {
-            LOG.info("");
             throw new UserException("Cannot create transaction, the user: " + giver.getId() + " have not enough sold");
         }
         giver.setSold(giver.getSold() - amount);

@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class TransactionController {
@@ -24,7 +23,7 @@ public class TransactionController {
     private final static Logger LOG = LoggerFactory.getLogger(TransactionController.class);
 
     @PostMapping("/transfer")
-    public String createTransaction(@RequestBody TransactionsDto transactionsToCreate) {
+    public String createTransaction(TransactionsDto transactionsToCreate) {
         LOG.info("create transaction :{}" ,transactionsToCreate);
 
         AppUser appUser = userService.getUser();
