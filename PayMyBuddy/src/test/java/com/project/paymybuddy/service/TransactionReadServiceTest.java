@@ -1,5 +1,6 @@
 package com.project.paymybuddy.service;
 
+import com.project.paymybuddy.exception.UserException;
 import com.project.paymybuddy.model.AppUser;
 import com.project.paymybuddy.model.Transaction;
 import com.project.paymybuddy.model.TransactionReadDto;
@@ -19,8 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -56,6 +56,27 @@ public class TransactionReadServiceTest {
         assertEquals(transaction.getAmount(), transactionReadDtoList.get(0).getAmount());
         assertEquals(transaction.getDescription(), transactionReadDtoList.get(0).getDescription());
         assertEquals(1, transactionReadDtoList.size());
+    }
+
+    @Test
+    void getAllTransaction_userNotFound() {
+        Transaction transaction = new Transaction();
+        AppUser giver = new AppUser();
+        giver.setId(1);
+        AppUser receiver = new AppUser();
+        receiver.setFirstName("toto");
+        receiver.setId(2);
+        transaction.setAmount(100f);
+        transaction.setDescription("test");
+        transaction.setReceiverId(receiver.getId());
+
+        when(transactionRepository.findAllByGiverId(any())).thenReturn(List.of(transaction));
+        when(userRepository.findById(any())).thenThrow(new UserException("User not found"));
+
+        UserException exception = assertThrows(UserException.class,
+                () -> transactionReadService.getAllTransactionRead(giver));
+
+        assertEquals("User not found", exception.getMessage());
     }
 
     @Test
