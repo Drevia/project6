@@ -102,4 +102,29 @@ public class TransactionReadServiceTest {
 
         assertNotNull(result);
     }
+
+    @Test
+    void getPagedTransaction_UserNotFound() {
+        Transaction transaction = new Transaction();
+        AppUser giver = new AppUser();
+        giver.setId(1);
+        AppUser receiver = new AppUser();
+        receiver.setId(2);
+        receiver.setFirstName("toto");
+        transaction.setAmount(100f);
+        transaction.setDescription("test");
+        transaction.setGiverId(giver.getId());
+        transaction.setReceiverId(receiver.getId());
+
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.add(transaction);
+        Page<Transaction>transactionPage = new PageImpl<>(transactions);
+
+        when(transactionRepository.findAll(any(Pageable.class))).thenReturn(transactionPage);
+
+        UserException exception = assertThrows(UserException.class,
+                () -> transactionReadService.getPagedTransactions(PageRequest.of(0, 3)));
+
+        assertEquals("User not found", exception.getMessage());
+    }
 }
