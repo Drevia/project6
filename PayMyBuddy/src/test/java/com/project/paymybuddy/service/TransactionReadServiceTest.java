@@ -71,7 +71,6 @@ public class TransactionReadServiceTest {
         transaction.setReceiverId(receiver.getId());
 
         when(transactionRepository.findAllByGiverId(any())).thenReturn(List.of(transaction));
-        when(userRepository.findById(any())).thenThrow(new UserException("User not found"));
 
         UserException exception = assertThrows(UserException.class,
                 () -> transactionReadService.getAllTransactionRead(giver));
