@@ -17,6 +17,10 @@ public class UserService {
 
     private final static Logger LOG = LoggerFactory.getLogger(UserService.class);
 
+    /**
+     *
+     * @return the current user
+     */
     public AppUser getUser() {
         LOG.info("Searching for user to connect");
         String currentUser = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();

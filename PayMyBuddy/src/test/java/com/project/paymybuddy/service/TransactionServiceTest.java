@@ -24,13 +24,13 @@ public class TransactionServiceTest {
 
 
     @InjectMocks
-    TransactionService transactionService;
+    private TransactionService transactionService;
 
     @Mock
-    TransactionRepository transactionRepository;
+    private TransactionRepository transactionRepository;
 
     @Mock
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Test
     void createTransactionOk() {
@@ -66,7 +66,7 @@ public class TransactionServiceTest {
         transactionsDto.setGiverId(1);
         transactionsDto.setReceiverId(2);
 
-        when(userRepository.findById(1)).thenThrow(new UserException("Giver not found"));
+        when(userRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(UserException.class, () -> transactionService.createTransactions(transactionsDto));
         verify(transactionRepository, times(0)).save(any(Transaction.class));
@@ -83,7 +83,7 @@ public class TransactionServiceTest {
         transactionsDto.setReceiverId(2);
 
         when(userRepository.findById(1)).thenReturn(Optional.of(giver));
-        when(userRepository.findById(2)).thenThrow(new UserException("Receiver not found"));
+        when(userRepository.findById(2)).thenReturn(Optional.empty());
 
         assertThrows(UserException.class, () -> transactionService.createTransactions(transactionsDto));
         verify(transactionRepository, times(0)).save(any(Transaction.class));

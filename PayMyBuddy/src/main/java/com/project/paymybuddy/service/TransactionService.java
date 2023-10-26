@@ -26,6 +26,11 @@ public class TransactionService {
 
     private final static Logger LOG = LoggerFactory.getLogger(TransactionService.class);
 
+    /**
+     *
+     * @param transactionsToCreate
+     * @return
+     */
     @Transactional
     public Transaction createTransactions(TransactionsDto transactionsToCreate) {
         Transaction transaction = new Transaction();

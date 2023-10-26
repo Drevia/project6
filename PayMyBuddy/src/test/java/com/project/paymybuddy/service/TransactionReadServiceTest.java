@@ -28,13 +28,13 @@ import static org.mockito.Mockito.when;
 public class TransactionReadServiceTest {
 
     @Mock
-    TransactionRepository transactionRepository;
+    private TransactionRepository transactionRepository;
 
     @Mock
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @InjectMocks
-    TransactionReadService transactionReadService;
+    private TransactionReadService transactionReadService;
 
     @Test
     void getAllTransactionOk() {

@@ -30,9 +30,10 @@ public class SpringSecurityConf {
                                 .defaultSuccessUrl("/transfer", true)
                                 .permitAll()
 
-                ).authorizeHttpRequests().requestMatchers("/transfer").fullyAuthenticated()
-                .requestMatchers("/css/login-styles.css").permitAll()
-                .requestMatchers("/css/transfer-styles.css").permitAll();
+                ).authorizeHttpRequests((authorizeHttpRequests) ->
+                        authorizeHttpRequests.requestMatchers("/transfer").fullyAuthenticated()
+                        .requestMatchers("/css/login-styles.css").permitAll()
+                        .requestMatchers("/css/transfer-styles.css").permitAll());
 
         return http.build();
     }
