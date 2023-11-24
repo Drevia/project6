@@ -46,7 +46,7 @@
       <th>Amount</th>
     </tr>
     <!-- Ajoutez ici les données de transactions dans les lignes de tableau -->
-      <tr th:each="transaction : ${transactionsPage.content}">
+      <tr th:each="transaction : ${transactionsRead}">
         <td th:text="${transaction.connexionsName}"></td>
         <td th:text="${transaction.description}"></td>
         <td th:text="${transaction.amount}"></td>

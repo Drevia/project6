@@ -1,8 +1,8 @@
-INSERT INTO app_user (email, nom, prenom, mot_de_passe, balance) VALUES ('Toto@gmail.com', 'Sample', 'Toto', 'passwordTest', 100);
-INSERT INTO app_user (email, nom, prenom, mot_de_passe, balance) VALUES ('Tata@gmail.com', 'Anyone', 'Tata', 'passwordTest2', 200);
-INSERT INTO app_user (email, nom, prenom, mot_de_passe, balance) VALUES ('John@gmail.com', 'Lambda', 'John', 'passwordTest3', 30);
-INSERT INTO app_user (email, nom, prenom, mot_de_passe, balance) VALUES ('Tutu@gmail.com', 'Test', 'Tutu', 'passwordTest4', 110);
-INSERT INTO app_user (email, nom, prenom, mot_de_passe, balance) VALUES ('emailTest@test.com', 'nameTest', 'firstNameTest', 'passwordTest5', 0);
+INSERT INTO app_user (email, nom, prenom, mot_de_passe, balance) VALUES ('Toto@gmail.com', 'Sample', 'Toto', '$2a$10$qkpAzvT4Bq8xBhBAsu064OXQ7Ouwh2agnlX7K1Vzc1IC964SUBVRe', 100);
+INSERT INTO app_user (email, nom, prenom, mot_de_passe, balance) VALUES ('Tata@gmail.com', 'Anyone', 'Tata', '$2a$10$i7LqFwP000Mv/n5qr9NU1uPlnf3s26cGOUEl7BgnSbZl53HmkhEdC', 200);
+INSERT INTO app_user (email, nom, prenom, mot_de_passe, balance) VALUES ('John@gmail.com', 'Lambda', 'John', '$2a$10$TeImEVKuIUjeHiZj5l2.Z.EzR4kebmjKMZL8iyoR3ll5mPj11wGyG', 30);
+INSERT INTO app_user (email, nom, prenom, mot_de_passe, balance) VALUES ('Tutu@gmail.com', 'Test', 'Tutu', '$2a$10$y4D5S6gZYw03pal5Cn5AIObyNr3jmEZRMf2SLewaBnww9iYV2AQ0K', 110);
+INSERT INTO app_user (email, nom, prenom, mot_de_passe, balance) VALUES ('emailTest@test.com', 'nameTest', 'firstNameTest', '$2a$10$fKBlgYCw4hv3Vy2Kyon3OOYG0.7jJWUbVlv3pnbU8fLRpBtpXfZnK', 0);
 INSERT INTO transaction (giver_id, receiver_id, amount, description, date) VALUES (1, 1, 10, 'description', '2023-01-01');
 INSERT INTO transaction (giver_id, receiver_id, amount, description, date) VALUES (1, 4, 50, 'description', '2023-01-01');
 INSERT INTO transaction (giver_id, receiver_id, amount, description, date) VALUES (1, 4, 100, 'description', '2023-01-01');
@@ -23,3 +23,11 @@ INSERT INTO transaction (giver_id, receiver_id, amount, description, date) VALUE
 INSERT INTO transaction (giver_id, receiver_id, amount, description, date) VALUES (5, 4, 85, 'description', '2023-01-01');
 INSERT INTO transaction (giver_id, receiver_id, amount, description, date) VALUES (5, 4, 70, 'description', '2023-01-01');
 INSERT INTO transaction (giver_id, receiver_id, amount, description, date) VALUES (5, 2, 69, 'description', '2023-01-01');
+INSERT INTO friendship (user_origin_id, friend_id) VALUES (1, 2);
+INSERT INTO friendship (user_origin_id, friend_id) VALUES (1, 3);
+INSERT INTO friendship (user_origin_id, friend_id) VALUES (1, 4);
+INSERT INTO friendship (user_origin_id, friend_id) VALUES (1, 5);
+INSERT INTO friendship (user_origin_id, friend_id) VALUES (2, 1);
+INSERT INTO friendship (user_origin_id, friend_id) VALUES (3, 1);
+INSERT INTO friendship (user_origin_id, friend_id) VALUES (4, 1);
+INSERT INTO friendship (user_origin_id, friend_id) VALUES (5, 1);

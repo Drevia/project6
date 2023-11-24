@@ -33,9 +33,9 @@ public class TransferPageController {
         int pageSize = 3;
         Pageable pageable = PageRequest.of(page, pageSize);
 
-        Page<TransactionReadDto> pagedTransactions = transactionReadService.getPagedTransactions(pageable);
 
         AppUser appUser = userService.getUser();
+        Page<TransactionReadDto> pagedTransactions = transactionReadService.getPagedTransactions(pageable, appUser);
         List<TransactionReadDto> transactionReadDtoList;
         transactionReadDtoList = transactionReadService.getAllTransactionRead(appUser);
         List<Friendship> friendshipList = friendshipRepository.findAllByAppUserOriginId_Id(appUser.getId());

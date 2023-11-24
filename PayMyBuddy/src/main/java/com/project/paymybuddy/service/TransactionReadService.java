@@ -10,11 +10,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class TransactionReadService {
@@ -47,9 +50,12 @@ public class TransactionReadService {
         return transactionReadDtoList;
     }
 
-    public Page<TransactionReadDto> getPagedTransactions(Pageable pageable) {
+    public Page<TransactionReadDto> getPagedTransactions(Pageable pageable, AppUser appUser) {
         Page<Transaction> transactionPage = transactionRepository.findAll(pageable);
-        return transactionPage.map(this::pageTransactionReadDto);
+        List<Transaction> transactionList = transactionPage.stream().filter(transaction ->
+                appUser.getId().equals(transaction.getGiverId())).collect(Collectors.toList());
+        Page<Transaction> filteredTransaction = new PageImpl<>(transactionList, pageable, transactionList.size());
+        return filteredTransaction.map(this::pageTransactionReadDto);
     }
 
 

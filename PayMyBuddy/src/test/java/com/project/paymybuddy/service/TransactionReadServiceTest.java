@@ -98,7 +98,7 @@ public class TransactionReadServiceTest {
         when(transactionRepository.findAll(any(Pageable.class))).thenReturn(transactionPage);
         when(userRepository.findById(any())).thenReturn(Optional.of(receiver));
 
-        Page<TransactionReadDto> result = transactionReadService.getPagedTransactions(PageRequest.of(0, 3));
+        Page<TransactionReadDto> result = transactionReadService.getPagedTransactions(PageRequest.of(0, 3), giver);
 
         assertNotNull(result);
     }
@@ -123,7 +123,7 @@ public class TransactionReadServiceTest {
         when(transactionRepository.findAll(any(Pageable.class))).thenReturn(transactionPage);
 
         UserException exception = assertThrows(UserException.class,
-                () -> transactionReadService.getPagedTransactions(PageRequest.of(0, 3)));
+                () -> transactionReadService.getPagedTransactions(PageRequest.of(0, 3), giver));
 
         assertEquals("User not found", exception.getMessage());
     }
